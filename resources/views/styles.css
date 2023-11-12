@@ -1,0 +1,11 @@
+/* Establecer el fondo en blanco y el texto en negro */
+.bg-dark {
+    background-color: #ffffff;
+    color: #000000;
+}
+
+/* Establecer el fondo x en el color deseado y el texto en negro */
+.bg-dark-x {
+    background-color: rgb(0, 136, 255)!important;
+    color: #000000;
+}
