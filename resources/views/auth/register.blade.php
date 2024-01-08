@@ -4,15 +4,15 @@
 <div class="container">
     <div class="row justify-content-center">
         <div class="col-md-8">
-            <div class="card bg-dark text-light">
-                <div class="card-header">{{ __('Acompleta los campos solicitados') }}</div>
+            <div class="card">
+                <div class="card-header">{{ __('Register') }}</div>
 
                 <div class="card-body">
                     <form method="POST" action="{{ route('register') }}">
                         @csrf
 
                         <div class="row mb-3">
-                            <label for="name" class="col-md-4 col-form-label text-md-end text-light">{{ __('Nombre') }}</label>
+                            <label for="name" class="col-md-4 col-form-label text-md-end">{{ __('Name') }}</label>
 
                             <div class="col-md-6">
                                 <input id="name" type="text" class="form-control @error('name') is-invalid @enderror" name="name" value="{{ old('name') }}" required autocomplete="name" autofocus>
@@ -26,7 +26,7 @@
                         </div>
 
                         <div class="row mb-3">
-                            <label for="email" class="col-md-4 col-form-label text-md-end text-light">{{ __('Email') }}</label>
+                            <label for="email" class="col-md-4 col-form-label text-md-end">{{ __('Email Address') }}</label>
 
                             <div class="col-md-6">
                                 <input id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required autocomplete="email">
@@ -40,7 +40,7 @@
                         </div>
 
                         <div class="row mb-3">
-                            <label for="password" class="col-md-4 col-form-label text-md-end text-light">{{ __('Contraseña') }}</label>
+                            <label for="password" class="col-md-4 col-form-label text-md-end">{{ __('Password') }}</label>
 
                             <div class="col-md-6">
                                 <input id="password" type="password" class="form-control @error('password') is-invalid @enderror" name="password" required autocomplete="new-password">
@@ -54,7 +54,7 @@
                         </div>
 
                         <div class="row mb-3">
-                            <label for="password-confirm" class="col-md-4 col-form-label text-md-end text-light">{{ __('Confirma Contraseña') }}</label>
+                            <label for="password-confirm" class="col-md-4 col-form-label text-md-end">{{ __('Confirm Password') }}</label>
 
                             <div class="col-md-6">
                                 <input id="password-confirm" type="password" class="form-control" name="password_confirmation" required autocomplete="new-password">
@@ -63,8 +63,8 @@
 
                         <div class="row mb-0">
                             <div class="col-md-6 offset-md-4">
-                                <button type="submit" class="btn btn-primary w-100">
-                                    {{ __('Registrar') }}
+                                <button type="submit" class="btn btn-primary">
+                                    {{ __('Register') }}
                                 </button>
                             </div>
                         </div>
@@ -73,7 +73,6 @@
             </div>
         </div>
     </div>
-</div>
 </div>
 @endsection --}}
 
@@ -144,30 +143,35 @@
           <!-- FORMULARIO DE INICIO DE SESIÓN -->
           <form method="POST" action="{{ route('validar-registro') }}" class="mb-4">
             @csrf
-            @if ($errors->any())
-            <p class="text-danger">{{ $errors->first() }}</p>
-            @endif
+            {{-- @if ($errors->any())
+                <p class="text-danger">{{ $errors->first() }}</p>
+            @endif --}}
             <div class="mb-4">
-              <label for="emailInput" class="form-label fw-bold text-light text-decoration-none">Email</label>
-              <input type="email" name="email" class="form-control bg-dark-x border-0 fs-5" placeholder="Ingresa tu email" id="email" aria-describedby="emailHelp">
+                <label for="emailInput" class="form-label fw-bold text-light text-decoration-none">Email</label>
+                <input type="email" name="email" class="form-control bg-dark-x border-0 fs-5 @error('email') is-invalid @enderror" placeholder="Ingresa tu email" id="email" aria-describedby="emailHelp" value="{{ old('email') }}">
+                @error('email')
+                    <div class="invalid-feedback">{{ $message }}</div>
+                @enderror
             </div>
             <div class="mb-3">
-              <label for="passwordInput" class="form-label fw-bold text-light text-decoration-none">Contraseña</label>
-              <input type="password" name="password" class="form-control bg-dark-x border-0 mb-2 fs-5" placeholder="Ingresa tu contraseña" id="password">
-  
-              {{-- <a href="#" id="emailHelp" class="form-text text-light text-decoration-none">¿Has olvidado tu contraseña?</a> --}}
+                <label for="passwordInput" class="form-label fw-bold text-light text-decoration-none">Contraseña</label>
+                <input type="password" name="password" class="form-control bg-dark-x border-0 mb-2 fs-5 @error('password') is-invalid @enderror" placeholder="Ingresa tu contraseña" id="password">
+                @error('password')
+                    <div class="invalid-feedback">{{ $message }}</div>
+                @enderror
             </div>
             <div class="mb-3">
-              <label for="userInput" class="form-label fw-bold text-light text-decoration-none">Nombre</label>
-              <input type="text" name="name" class="form-control bg-dark-x border-0 mb-2 fs-5" placeholder="Ingresa tu nombre completo" id="name">
-  
-              {{-- <a href="#" id="emailHelp" class="form-text text-light text-decoration-none">¿Has olvidado tu contraseña?</a> --}}
+                <label for="userInput" class="form-label fw-bold text-light text-decoration-none">Nombre</label>
+                <input type="text" name="name" class="form-control bg-dark-x border-0 mb-2 fs-5 @error('name') is-invalid @enderror" placeholder="Ingresa tu nombre completo" id="name" value="{{ old('name') }}">
+                @error('name')
+                    <div class="invalid-feedback">{{ $message }}</div>
+                @enderror
             </div>
             <hr>
             <hr>
-            <button type="submit" class="btn btn-primary w-100" style="height: 50px;">Registrarse</button>
-
-          </form>
+            <button type="submit" class="btn btn-primary w-100 fw-bold" style="height: 50px;">Registrarse</button>
+        </form>
+           
           <!-- FIN DE FORMULARIO DE INICIO DE SESIÓN -->
           <!--text-muted-->
           {{-- <p class="fw-bold text-center text-light text-decoration-none">O inicia sesión con</p> --}}
@@ -188,4 +192,3 @@
     </div>
 </section>
 @endsection
-

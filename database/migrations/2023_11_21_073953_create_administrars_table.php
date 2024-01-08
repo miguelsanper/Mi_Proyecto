@@ -11,14 +11,8 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('historiales', function (Blueprint $table) {
+        Schema::create('administrars', function (Blueprint $table) {
             $table->id();
-            $table->string('nombre');
-            $table->date('fecha');
-            $table->string('origen');
-            $table->string('destino');
-            $table->decimal('costo', 8, 2);
-            // Agrega otras columnas según tus necesidades
             $table->timestamps();
         });
     }
@@ -28,6 +22,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('historiales');
+        Schema::dropIfExists('administrars');
     }
 };

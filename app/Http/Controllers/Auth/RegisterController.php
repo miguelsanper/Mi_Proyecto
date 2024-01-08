@@ -70,4 +70,36 @@ class RegisterController extends Controller
             'password' => Hash::make($data['password']),
         ]);
     }
+
+    // protected function create(array $data)
+    // {
+    //     $data['confirmation_code'] = str_random(25);
+    //     $user = User::create([
+    //         'name' => $data['name'],
+    //         'email' => $data['email'],
+    //         'password' => Hash::make($data['password']),
+    //         'confirmation_code' => $data['confirmation_code']
+    //     ]);
+
+    //     //
+    //     Mail::send('confirmation_code', $data, function($message) use ($data){
+    //         $message->to($data['email'], $data['name'])->subject('Por favor confirma tu correo');
+    //     });
+    //     return $user;
+    // }
+
+    // protected function verify($code)
+    // {
+    //     $user = User::where('confirmation_code', $code)->first();
+
+    //     if(! $user)
+    //     {
+    //         return redirect('/');
+    //     }
+    //     $user->confirmed= true;
+    //     $user->confirmation_code = null;
+    //     $user->save();
+
+    //     return redirect('/login')->with('notification', 'Has confirmado correctamente tu correo!');
+    // }
 }

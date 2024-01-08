@@ -1,6 +1,12 @@
 @extends('layouts.app')
 
 @section('content')
+@if (session('notification'))
+  <div class="alert alert-success">
+    {{ session('notification')}}
+  </div>
+@endif
+
 <section class="bg-dark">
     <!-- CARRUSEL -->
     <div class="row g-0">
@@ -65,24 +71,28 @@
           <!-- FORMULARIO DE INICIO DE SESIÓN -->
           <form method="POST" action="{{ route('inicia-sesion') }}" class="mb-4">
             @csrf
-            @if ($errors->any())
-            <p class="text-danger">{{ $errors->first() }}</p>
-            @endif
+            
             <div class="mb-4">
-              <label for="emailInput" class="form-label fw-bold text-light text-decoration-none">Email</label>
-              <input type="email" name="email" class="form-control bg-dark-x border-0 fs-5" placeholder="Ingresa tu email" id="email" aria-describedby="emailHelp">
+                <label for="emailInput" class="form-label fw-bold text-light text-decoration-none">Email</label>
+                <input type="email" name="email" class="form-control bg-dark-x border-0 fs-5 @error('email') is-invalid @enderror" placeholder="Ingresa tu email" id="email" aria-describedby="emailHelp" value="{{ old('email') }}">
+                @error('email')
+                    <div class="invalid-feedback">{{ $message }}</div>
+                @enderror
             </div>
+        
             <div class="mb-3">
-              <label for="passwordInput" class="form-label fw-bold text-light text-decoration-none">Contraseña</label>
-              <input type="password" name="password" class="form-control bg-dark-x border-0 mb-2 fs-5" placeholder="Ingresa tu contraseña" id="password">
-  
-              {{-- <a href="#" id="emailHelp" class="form-text text-light text-decoration-none">¿Has olvidado tu contraseña?</a> --}}
+                <label for="passwordInput" class="form-label fw-bold text-light text-decoration-none">Contraseña</label>
+                <input type="password" name="password" class="form-control bg-dark-x border-0 mb-2 fs-5 @error('password') is-invalid @enderror" placeholder="Ingresa tu contraseña" id="password">
+                @error('password')
+                    <div class="invalid-feedback">{{ $message }}</div>
+                @enderror
             </div>
+        
             <hr>
             <hr>
-            <button type="submit" class="btn btn-primary w-100" style="height: 50px;">Iniciar sesión</button>
-
-          </form>
+            <button type="submit" class="btn btn-primary w-100 fw-bold fs-6" style="height: 50px;">Iniciar sesión</button>
+        </form>
+        
           <!-- FIN DE FORMULARIO DE INICIO DE SESIÓN -->
           <!--text-muted-->
           {{-- <p class="fw-bold text-center text-light text-decoration-none">O inicia sesión con</p> --}}
@@ -96,7 +106,7 @@
   
         <!-- Enlace para crear una nueva cuenta -->
         <div class="text-center px-lg-5 pt-lg-3 pb-lg-4 p-4 w-100 mt-auto">
-          <p class="d-inline-block mb-0 px-lg-1 text-light text-decoration-none">¿Todavía no tienes una cuenta?</p> <a href="{{ route('register') }}" class="text-light fw-bold text-decoration-none">Crea una ahora</a>
+          <p class="d-inline-block mb-0 px-lg-1 text-light text-decoration-none">¿Todavía no tienes una cuenta?</p> <a href="{{ route('registro') }}" class="text-light fw-bold text-decoration-none">Crea una ahora</a>
         </div>
       </div>
       <!-- FIN DE LOGIN-->

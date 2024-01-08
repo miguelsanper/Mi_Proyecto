@@ -18,3 +18,8 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
 
+Route::get('/drivers', 'App\Http\Controllers\DriverController@index');
+Route::post('/drivers', 'App\Http\Controllers\DriverController@store');
+Route::get('/drivers/{driver}', 'App\Http\Controllers\DriverController@show');
+Route::put('/drivers/{driver}', 'App\Http\Controllers\DriverController@update');
+Route::delete('/drivers/{driver}', 'App\Http\Controllers\DriverController@destroy');

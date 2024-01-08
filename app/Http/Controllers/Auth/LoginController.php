@@ -28,6 +28,16 @@ class LoginController extends Controller
     public function register(Request $request)
     {
         // Validar los datos
+        $request->validate([
+            'email' => 'required|email',
+            'password' => 'required',
+            'name' => 'required',
+        ], [
+            'email.required' => 'El campo Email es obligatorio.',
+            'email.email' => 'Ingresa un formato de correo electrónico válido.',
+            'password.required' => 'El campo Contraseña es obligatorio.',
+            'name.required' => 'El campo Nombre es obligatorio.',
+        ]);
     
         $user = new User();
     
@@ -38,12 +48,21 @@ class LoginController extends Controller
     
         Auth::login($user);
     
-        return redirect(route('historial'));
+        return redirect(route('login'));
     }
     
     public function login(Request $request)
     {
         // Validar los datos del formulario de inicio de sesión
+        $request->validate([
+            'email' => 'required|email',
+            'password' => 'required',
+        ], [
+            'email.required' => 'El campo Email es obligatorio.',
+            'email.email' => 'Ingresa un formato de correo electrónico válido.',
+            'password.required' => 'El campo Contraseña es obligatorio.',
+        ]);
+
         $credentials = [
             "email" => $request, 
             'password' => $request->password,
@@ -56,7 +75,7 @@ class LoginController extends Controller
         {
             $request->session()->regenerate();
 
-            return redirect()->intended(route('historial'));
+            return redirect()->intended(route('privada'));
         }
         else
         {

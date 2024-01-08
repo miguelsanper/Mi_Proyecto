@@ -11,8 +11,11 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('historials', function (Blueprint $table) {
+        Schema::create('distances', function (Blueprint $table) {
             $table->id();
+            $table->string('origen');
+            $table->string('destino');
+            $table->string('kms');
             $table->timestamps();
         });
     }
@@ -22,6 +25,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('historials');
+        Schema::dropIfExists('distances');
     }
 };
